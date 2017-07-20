@@ -5,7 +5,7 @@
       <webServer id="f6613837-4cbe-4212-bb1c-3343be3181f1" name="DangouHost" url="http://31.170.165.99">
         <fileTransfer host="31.170.165.99" port="21" rootFolder="/public_html" password="df9bdf93df99df9ddf9edf9cdf98df92df9fdf9adfdadfcbdfd9df9adf9b" username="u225794967">
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" accurateTimestamps="ALWAYS" />
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" accurateTimestamps="ALWAYS" showHiddenFiles="true" />
           </advancedOptions>
           <option name="port" value="21" />
         </fileTransfer>
