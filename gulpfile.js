@@ -1,4 +1,4 @@
-const themePath = "./coffee/";
+const themePath = require("./tasks/variables/var")["themePath"];
 
 const $ = require("gulp-load-plugins")();
 const gulp = require("gulp");

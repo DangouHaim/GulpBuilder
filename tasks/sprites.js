@@ -1,4 +1,5 @@
-const themePath = "./coffee/";
+const themePath = require("./variables/var")["themePath"];
+const fullPath = require("./variables/var")["fullPath"];
 const gulp = require("gulp");
 const $ = require("gulp-load-plugins")();
 
@@ -11,7 +12,7 @@ module.exports = function (options) {
             .pipe($.spritesmith({
                 imgName: 'sprite.png',
                 cssName: 'sprite.css',
-                imgPath: "/wp-content/themes/coffee/inc/img/sprite.png"
+                imgPath: fullPath + "inc/img/sprite.png"
             }));
         spriteData.img.pipe(gulp.dest(themePath + 'inc/img/'));
         spriteData.css.pipe(gulp.dest(themePath + 'inc/css/'));

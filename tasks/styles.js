@@ -1,4 +1,4 @@
-const themePath = "./coffee/";
+const themePath = require("./variables/var")["themePath"];
 const gulp = require("gulp");
 const $ = require("gulp-load-plugins")();
 const combine = require("stream-combiner2").obj;
