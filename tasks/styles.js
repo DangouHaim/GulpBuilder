@@ -15,6 +15,7 @@ module.exports = function (options) {
             $.if(isDebug, $.sourcemaps.init()),
             $.sass().on('error', $.sass.logError),
             $.concat(options.target),
+            $.autoprefixer({ browsers: ['last 2 versions'], cascade: false }),
             $.cssnano(),
             $.if(isDebug, $.sourcemaps.write(), $.cssnano()),
             gulp.dest(themePath + "inc/css/")
