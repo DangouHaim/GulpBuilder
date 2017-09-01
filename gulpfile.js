@@ -24,12 +24,12 @@ requireTask("prepareScss", "./tasks/buildPrepare", {
 });
 
 requireTask("styles", "./tasks/styles", {
-    src: [themePath + "inc/sass/build/*.scss", themePath + "inc/sass/build/*.sass"],
+    src: [themePath + "inc/sass/build/*.scss", themePath + "inc/sass/build/*.sass", "!" + themePath + "inc/sass/header.sass", "!" + themePath + "inc/sass/header.scss"],
     target: "main.css"
 });
 
 requireTask("prepareHeader", "./tasks/styles", {
-    src: [themePath + "inc/sass/header.sass"],
+    src: [themePath + "inc/sass/header.sass", themePath + "inc/sass/header.scss"],
     target: "header.css"
 });
 
