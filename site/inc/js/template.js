@@ -1,5 +1,5 @@
 (function($){
-    var themePath = "/wp-content/themes/coffee/";
+    var themePath = "/wp-content/themes/site/";
     window.askAPI = {
         debug: false,
         devel: false,
@@ -8,18 +8,12 @@
             css: []
         },
         scripts: {
-            main: themePath + "inc/js/main.js",
-            bootstrap: themePath + "inc/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js",
-            owlCarousel: themePath + "inc/lib/OwlCarousel2-2.2.1/dist/owl.carousel.min.js",
-            yandexMaps: "https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=Map,Placemark"
+            main: themePath + "inc/js/main.js"
         },
         css: {
             main: themePath + 'inc/css/main.css',
             header: themePath + 'inc/css/header.css',
-            sprite: themePath + 'inc/css/sprite.css',
-            bootstrap: themePath + "inc/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css",
-            bootstrapTheme: themePath + "inc/lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css",
-            owlCarousel: themePath + "inc/lib/OwlCarousel2-2.2.1/dist/assets/owl.carousel.min.css"
+            sprite: themePath + 'inc/css/sprite.css'
         },
         /**
          * Динамическая загрузка скрипта
@@ -100,20 +94,10 @@
             }
 
             askAPI.loadStyle("header", true); //styles from inc/css/header.css - hardcoded in header.php
-         	askAPI.loadStyle("bootstrapTheme", true, function () {
-         		askAPI.loadStyle("bootstrap", true);
-         	});
-         	askAPI.loadStyle("owlCarousel", true);
          	askAPI.loadStyle("sprite", true);
             askAPI.loadStyle("main", true);
 
-
-            
-            askAPI.loadScript("bootstrap", function(){
-                askAPI.loadScript("main", function(){
-                    
-                });
-            });
+            askAPI.loadScript("main", function(){});
         },
 
     };
