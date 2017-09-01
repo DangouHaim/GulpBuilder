@@ -1,8 +1,10 @@
+var rootDirectory = "site/";
+var host = "site.com";
 var res = {
-	themePath: ["./site/"],
-	fullPath: ["/wp-content/themes/site/"],
-	siteName: ["site.com"],
-	siteProxy: ["site.com:8000"]
+	themePath: ["./" + rootDirectory],
+	fullPath: ["/wp-content/themes/" + rootDirectory],
+	siteName: [host],
+	siteProxy: [host + ":8000"]
 };
 
 module.exports = res;
