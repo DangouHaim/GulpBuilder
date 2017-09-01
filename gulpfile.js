@@ -48,7 +48,14 @@ gulp.task("build", gulp.parallel(gulp.series("fonts", "buildPreparing", "styles"
 gulp.task("watch", function() {
     gulp.watch(themePath + "inc/sass/*.*", gulp.series("buildPreparing", "styles"))
         .on("unlink", function () {
-            $.remember.forget("styles");
+            delete $.cached.caches['styles'];
+            remember.forget('styles');
+        })
+        .on("change", function (event) {
+            if (event.type === 'deleted') {
+                delete $.cached.caches['styles'];
+                remember.forget('styles');
+            }
         });
 
     gulp.watch(themePath + "inc/icons/**", gulp.series("fonts", "buildPreparing", "styles"))
