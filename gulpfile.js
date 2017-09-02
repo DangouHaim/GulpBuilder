@@ -14,17 +14,17 @@ function requireTask(taskName, path, options) {
 }
 
 requireTask("prepareSass", "./tasks/buildPrepare", {
-    src: [themePath + "inc/sass/_*.sass", themePath + "inc/sass/*.sass", "!" + themePath + "inc/sass/header.sass"],
+    src: [themePath + "inc/sass/_build.sass"],
     ext: "sass"
 });
 
 requireTask("prepareScss", "./tasks/buildPrepare", {
-    src: [themePath + "inc/sass/_*.scss", themePath + "inc/sass/*.scss", "!" + themePath + "inc/sass/header.scss"],
+    src: [themePath + "inc/sass/_build.scss"],
     ext: "scss"
 });
 
 requireTask("styles", "./tasks/styles", {
-    src: [themePath + "inc/sass/build/*.scss", themePath + "inc/sass/build/*.sass", "!" + themePath + "inc/sass/header.sass", "!" + themePath + "inc/sass/header.scss"],
+    src: [themePath + "inc/sass/build/*.scss", themePath + "inc/sass/build/*.sass"],
     target: "main.css"
 });
 
@@ -48,14 +48,7 @@ gulp.task("build", gulp.parallel(gulp.series("fonts", "buildPreparing", "styles"
 gulp.task("watch", function() {
     gulp.watch(themePath + "inc/sass/*.*", gulp.series("buildPreparing", "styles"))
         .on("unlink", function () {
-            delete $.cached.caches['styles'];
-            remember.forget('styles');
-        })
-        .on("change", function (event) {
-            if (event.type === 'deleted') {
-                delete $.cached.caches['styles'];
-                remember.forget('styles');
-            }
+            $.remember.forget("styles");
         });
 
     gulp.watch(themePath + "inc/icons/**", gulp.series("fonts", "buildPreparing", "styles"))
