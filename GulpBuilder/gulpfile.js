@@ -46,18 +46,33 @@ gulp.task("buildPreparing", gulp.series("prepareHeader", gulp.parallel("prepareS
 gulp.task("build", gulp.series("fonts", "buildPreparing", "styles", "sprites"));
 
 gulp.task("watch", function() {
-    gulp.watch(themePath + "inc/sass/*.*", gulp.series("buildPreparing", "styles"))
+    gulp.watch([themePath + "inc/sass/*.*", themePath + "inc/sass/sass/*.*"], gulp.series("fonts", "buildPreparing", "styles"))
         .on("unlink", function () {
+            delete $.cached.caches['styles'];
+            $.remember.forget("styles");
+        })
+        .on("change", function (data) {
+            delete $.cached.caches['styles'];
             $.remember.forget("styles");
         });
 
     gulp.watch(themePath + "inc/icons/**", gulp.series("fonts", "buildPreparing", "styles"))
         .on("unlink", function () {
+            delete $.cached.caches['fonts'];
             $.remember.forget("fonts");
+        })
+        .on("change", function (data) {
+            delete $.cached.caches['fonts'];
+            $.remember.forget("styles");
         });
 
     gulp.watch(themePath + "inc/img/sprites/**", gulp.series("sprites"))
         .on("unlink", function () {
+            delete $.cached.caches['sprites'];
+            $.remember.forget("sprites");
+        })
+        .on("change", function (data) {
+            delete $.cached.caches['sprites'];
             $.remember.forget("sprites");
         });
 });
