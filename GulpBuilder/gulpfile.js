@@ -41,9 +41,9 @@ requireTask("sprites", "./tasks/sprites", {
     src: themePath + 'inc/img/sprites/*.*'
 });
 
-gulp.task("buildPreparing", gulp.parallel("prepareHeader", "prepareSass", "prepareScss"));
+gulp.task("buildPreparing", gulp.series("prepareHeader", gulp.parallel("prepareSass", "prepareScss")));
 
-gulp.task("build", gulp.parallel(gulp.series("fonts", "buildPreparing", "styles"), "sprites"));
+gulp.task("build", gulp.series("fonts", "buildPreparing", "styles", "sprites"));
 
 gulp.task("watch", function() {
     gulp.watch(themePath + "inc/sass/*.*", gulp.series("buildPreparing", "styles"))
