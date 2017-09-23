@@ -1,0 +1,3 @@
+cd "GulpBuilder"
+gulp
+pause
