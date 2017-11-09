@@ -10,7 +10,7 @@ module.exports = function (options) {
             $.cached("scripts"),
             $.remember("scripts"),
             $.minify(),
-            gulp.dest(themePath + "inc/js/min/")
+            gulp.dest(themePath + "inc/js/")
             ).on("error", $.notify.onError(function (err) {
                 return {
                     title: "Scripts",
