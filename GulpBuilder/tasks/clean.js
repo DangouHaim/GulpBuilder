@@ -6,14 +6,11 @@ const combine = require("stream-combiner2").obj;
 module.exports = function (options) {
     return function () {
         return combine(
-            gulp.src(options.src),
-            $.cached("scripts"),
-            $.remember("scripts"),
-            $.minify(),
-            gulp.dest(themePath + "inc/js/min/")
+            gulp.src(options.src, {read: false}),
+            $.clean({force: true})
             ).on("error", $.notify.onError(function (err) {
                 return {
-                    title: "Scripts",
+                    title: options.name,
                     message: err.message
                 };
             }));

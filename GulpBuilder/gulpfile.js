@@ -29,8 +29,12 @@ requireTask("styles", "./tasks/styles", {
 });
 
 requireTask("scripts", "./tasks/scripts", {
-    src: [themePath + "inc/js/*.js"],
-    target: "all-min.js"
+    src: [themePath + "inc/js/*.js"]
+});
+
+requireTask("cleanScripts", "./tasks/clean", {
+    src: [themePath + "inc/js/min/*.js", "!" + themePath + "inc/js/min/*-min.js"],
+    name: "cleanScripts"
 });
 
 requireTask("prepareHeader", "./tasks/styles", {
@@ -48,7 +52,9 @@ requireTask("sprites", "./tasks/sprites", {
 
 gulp.task("buildPreparing", gulp.series("prepareHeader", gulp.parallel("prepareSass", "prepareScss")));
 
-gulp.task("build", gulp.series("fonts", "buildPreparing", "styles", "sprites", "scripts"));
+gulp.task("scriptsMin", gulp.series("scripts", "cleanScripts"));
+
+gulp.task("build", gulp.series("fonts", "buildPreparing", "styles", "sprites", "scriptsMin"));
 
 gulp.task("watch", function() {
     gulp.watch([themePath + "inc/sass/*.*", themePath + "inc/sass/sass/*.*"], gulp.series("fonts", "buildPreparing", "styles"))
@@ -81,7 +87,7 @@ gulp.task("watch", function() {
         $.remember.forget("sprites");
     });
 
-    gulp.watch(themePath + "inc/js/*.js", gulp.series("scripts"))
+    gulp.watch(themePath + "inc/js/*.js", gulp.series("scriptsMin"))
     .on("unlink", function () {
         delete $.cached.caches['scripts'];
         $.remember.forget("scripts");
