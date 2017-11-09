@@ -4,7 +4,7 @@ const $ = require("gulp-load-plugins")();
 const combine = require("stream-combiner2").obj;
 
 
-const isDebug = !process.env.NODE_ENV || process.env.NODE_ENV == "development";
+const isDebug = require("./variables/var")["isDebug"];
 
 module.exports = function (options) {
     return function () {

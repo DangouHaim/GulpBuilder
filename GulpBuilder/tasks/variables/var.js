@@ -1,6 +1,7 @@
-var rootDirectory = "../site/";
-var host = "site.com";
+var rootDirectory = "../angl/";
+var host = "angl.by";
 var res = {
+	isDebug: false,
 	themePath: ["./" + rootDirectory],
 	fullPath: ["/wp-content/themes/" + rootDirectory],
 	siteName: [host],
