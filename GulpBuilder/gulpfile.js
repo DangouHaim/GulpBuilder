@@ -28,6 +28,11 @@ requireTask("styles", "./tasks/styles", {
     target: "main.css"
 });
 
+requireTask("scripts", "./tasks/scripts", {
+    src: [themePath + "inc/js/*.js"],
+    target: "all-min.js"
+});
+
 requireTask("prepareHeader", "./tasks/styles", {
     src: [themePath + "inc/sass/header.sass", themePath + "inc/sass/header.scss"],
     target: "header.css"
@@ -43,38 +48,48 @@ requireTask("sprites", "./tasks/sprites", {
 
 gulp.task("buildPreparing", gulp.series("prepareHeader", gulp.parallel("prepareSass", "prepareScss")));
 
-gulp.task("build", gulp.series("fonts", "buildPreparing", "styles", "sprites"));
+gulp.task("build", gulp.series("fonts", "buildPreparing", "styles", "sprites", "scripts"));
 
 gulp.task("watch", function() {
     gulp.watch([themePath + "inc/sass/*.*", themePath + "inc/sass/sass/*.*"], gulp.series("fonts", "buildPreparing", "styles"))
-        .on("unlink", function () {
-            delete $.cached.caches['styles'];
-            $.remember.forget("styles");
-        })
-        .on("change", function (data) {
-            delete $.cached.caches['styles'];
-            $.remember.forget("styles");
-        });
+    .on("unlink", function () {
+        delete $.cached.caches['styles'];
+        $.remember.forget("styles");
+    })
+    .on("change", function (data) {
+        delete $.cached.caches['styles'];
+        $.remember.forget("styles");
+    });
 
     gulp.watch(themePath + "inc/icons/**", gulp.series("fonts", "buildPreparing", "styles"))
-        .on("unlink", function () {
-            delete $.cached.caches['fonts'];
-            $.remember.forget("fonts");
-        })
-        .on("change", function (data) {
-            delete $.cached.caches['fonts'];
-            $.remember.forget("styles");
-        });
+    .on("unlink", function () {
+        delete $.cached.caches['fonts'];
+        $.remember.forget("fonts");
+    })
+    .on("change", function (data) {
+        delete $.cached.caches['fonts'];
+        $.remember.forget("styles");
+    });
 
     gulp.watch(themePath + "inc/img/sprites/**", gulp.series("sprites"))
-        .on("unlink", function () {
-            delete $.cached.caches['sprites'];
-            $.remember.forget("sprites");
-        })
-        .on("change", function (data) {
-            delete $.cached.caches['sprites'];
-            $.remember.forget("sprites");
-        });
+    .on("unlink", function () {
+        delete $.cached.caches['sprites'];
+        $.remember.forget("sprites");
+    })
+    .on("change", function (data) {
+        delete $.cached.caches['sprites'];
+        $.remember.forget("sprites");
+    });
+
+    gulp.watch(themePath + "inc/js/*.js", gulp.series("scripts"))
+    .on("unlink", function () {
+        delete $.cached.caches['scripts'];
+        $.remember.forget("scripts");
+    })
+    .on("change", function (data) {
+        delete $.cached.caches['scripts'];
+        $.remember.forget("scripts");
+    });
 });
 
 requireTask("server", "./tasks/server", {
