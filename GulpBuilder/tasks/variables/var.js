@@ -1,11 +1,13 @@
-var rootDirectory = "../angl/";
-var host = "angl.by";
+var rootDirectory = "../olam/";
+var host = "joberli.ru";
+var port = 8000;
 var res = {
 	isDebug: false,
 	themePath: ["./" + rootDirectory],
 	fullPath: ["/wp-content/themes/" + rootDirectory],
 	siteName: [host],
-	siteProxy: [host + ":8000"]
+	sitePort: [port],
+	siteProxy: [host + ":80"]
 };
 
 module.exports = res;
